@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>meuprimeiroprojetojsf</groupId>
+  <artifactId>meuprimeiroprojetojsf</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <!-- AQUI ESTÁ A MÁGICA: Diz para o Eclipse que isso é um projeto Web -->
+  <packaging>war</packaging>
+  <build>
+    <finalName>meuprimeiroprojetojsf</finalName>
+  </build>
+  
+  <properties>
+    <meuprimeiroprojetojsf-packaging>br.com.cursojsf</meuprimeiroprojetojsf-packaging>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    
+    <!-- API do Jakarta EE (Contém as anotações e interfaces do JSF, CDI, JPA, etc.) -->
+    <!-- O scope "provided" avisa que o servidor WildFly já vai fornecer o motor para rodar isso -->
+    <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-web-api</artifactId>
+        <version>10.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <!-- JUnit para Testes -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version>
+        <scope>test</scope>
+    </dependency>    
+    
+  </dependencies>
+</project>

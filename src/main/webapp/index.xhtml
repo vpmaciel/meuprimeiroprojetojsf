@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Minha Primeira Página JSF</title>
+</h:head>
+
+<h:body>
+	<h:form id="meuFormulario2">
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Nome:" for="nomeUsuario" />
+			<h:inputText id="nome" value="#{pessoaBean.nome}" />
+
+			<h:outputLabel value="" />
+			<h:commandButton value="Adicionar nome"
+				action="#{pessoaBean.addNome}" />
+		</h:panelGrid>
+
+		<h:dataTable value="#{pessoaBean.nomes}" var="n">
+			<h:column>
+				<f:facet name="header">Nome Cadastrado</f:facet>
+				<h:outputText value="#{n}" />
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+</h:body>
+
+</html>
