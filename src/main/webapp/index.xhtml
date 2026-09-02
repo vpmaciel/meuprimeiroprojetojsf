@@ -9,24 +9,26 @@
 </h:head>
 
 <h:body>
-	<h:form id="meuFormulario2">
+	<h:form id="formPessoa">
 		<h:panelGrid columns="2">
-
-			<h:outputLabel value="Nome:" for="nomeUsuario" />
-			<h:inputText id="nome" value="#{pessoaBean.nome}" />
-
-			<h:outputLabel value="" />
-			<h:commandButton value="Adicionar nome"
-				action="#{pessoaBean.addNome}" />
-		</h:panelGrid>
-
-		<h:dataTable value="#{pessoaBean.nomes}" var="n">
-			<h:column>
-				<f:facet name="header">Nome Cadastrado</f:facet>
-				<h:outputText value="#{n}" />
-			</h:column>
+			<h:outputLabel value="Nome:" />
+			<h:inputText value="#{pessoaBean.pessoa.nome}" />
 			
-		</h:dataTable>
+			<h:outputLabel value="Sobrenome:" />
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
+			
+			<h:outputLabel value="Idade:" />
+			<h:inputText value="#{pessoaBean.pessoa.idade}" />
+			
+			<h:outputLabel value="Nascimento:" />
+			<h:inputText value="#{pessoaBean.pessoa.nascimento}">
+			<!-- Conversor obrigatório para java.util.Date -->
+            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+            </h:inputText>
+			
+			<h:outputText value="" />
+			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
+		</h:panelGrid>
 	</h:form>
 </h:body>
 
