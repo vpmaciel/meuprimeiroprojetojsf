@@ -11,6 +11,10 @@
 <h:body>
 	<h:form id="formPessoa">
 		<h:panelGrid columns="2">
+		
+			<h:outputLabel value="Id:" />
+			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
+			
 			<h:outputLabel value="Nome:" />
 			<h:inputText value="#{pessoaBean.pessoa.nome}" />
 			
@@ -22,12 +26,69 @@
 			
 			<h:outputLabel value="Nascimento:" />
 			<h:inputText value="#{pessoaBean.pessoa.nascimento}">
-			<!-- Conversor obrigatório para java.util.Date -->
+			
             <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
             </h:inputText>
 			
 			<h:outputText value="" />
-			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
+			<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />			
+			
+			<h:outputText value="" />
+			<h:commandButton value="Novo" action="#{pessoaBean.novo}" />
+			
+			<h:outputText value="" />
+			<h:commandButton value="Remover" action="#{pessoaBean.remove}" />
+			
+			<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+			    
+			    <!-- Coluna ID -->
+			    <h:column>
+			        <f:facet name="header">ID</f:facet>
+			        <h:outputText value="#{pessoa.id}" />
+			    </h:column>
+			
+			    <!-- Coluna Nome -->
+			    <h:column>
+			        <f:facet name="header">Nome</f:facet>
+			        <h:outputText value="#{pessoa.nome}" />
+			    </h:column>
+			
+			    <!-- Coluna Sobrenome -->
+			    <h:column>
+			        <f:facet name="header">Sobrenome</f:facet>
+			        <h:outputText value="#{pessoa.sobrenome}" />
+			    </h:column>
+			
+			    <!-- Coluna Idade -->
+			    <h:column>
+			        <f:facet name="header">Idade</f:facet>
+			        <h:outputText value="#{pessoa.idade}" />
+			    </h:column>
+			
+			    <!-- Coluna Nascimento -->
+			    <h:column>
+			        <f:facet name="header">Nascimento</f:facet>
+			        <h:outputText value="#{pessoa.nascimento}" />
+			    </h:column>
+			    
+			    <h:column>
+			        <f:facet name="header"></f:facet>
+			        <h:commandLink value="Editar">
+			        	<f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}" />
+			        </h:commandLink>
+			    </h:column>
+			
+			
+			<h:column>
+			        <f:facet name="header"></f:facet>
+			        <h:commandLink value="Excluir" action="#{pessoaBean.remove}">
+			        	<f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}" />
+			        </h:commandLink>
+			    </h:column>
+			
+			
+			</h:dataTable>
+			
 		</h:panelGrid>
 	</h:form>
 </h:body>

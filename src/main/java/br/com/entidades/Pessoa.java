@@ -12,7 +12,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 public class Pessoa {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,41 +21,52 @@ public class Pessoa {
     private Integer idade;
     @Temporal(TemporalType.DATE)
     private Date nascimento;
-    
+
     public Long getId() {
-        return id;
+	return id;
     }
+
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
+
     public String getNome() {
-        return nome;
+	return nome;
     }
+
     public void setNome(String nome) {
-        this.nome = nome;
+	this.nome = nome;
     }
+
     public String getSobrenome() {
-        return sobrenome;
+	return sobrenome;
     }
+
     public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+	this.sobrenome = sobrenome;
     }
+
     public Integer getIdade() {
-        return idade;
+	return idade;
     }
+
     public void setIdade(Integer idade) {
-        this.idade = idade;
+	this.idade = idade;
     }
+
     public Date getNascimento() {
-        return nascimento;
+	return nascimento;
     }
+
     public void setNascimento(Date nascimento) {
-        this.nascimento = nascimento;
+	this.nascimento = nascimento;
     }
+
     @Override
     public int hashCode() {
 	return Objects.hash(id);
-    }   
+    }
+
     @Override
     public boolean equals(Object obj) {
 	if (this == obj)
@@ -67,6 +78,5 @@ public class Pessoa {
 	Pessoa other = (Pessoa) obj;
 	return Objects.equals(id, other.id);
     }
-    
-    
+
 }
