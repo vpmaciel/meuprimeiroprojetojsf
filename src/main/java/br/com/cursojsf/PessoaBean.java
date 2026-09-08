@@ -9,7 +9,6 @@ import br.com.entidades.Pessoa;
 import br.com.repository.IDAOPessoa;
 import br.com.repository.IDAOPessoaImpl;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.component.FacesComponent;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -30,17 +29,31 @@ public class PessoaBean implements Serializable {
     public void carregarPessoas() {
 	pessoas = daoGeneric.getListEntity(Pessoa.class);
     }
-    
+
     public String logar() {
-	Pessoa pessoaUser = idaoPessoa.consultarUsuario(pessoa.getLogin(),pessoa.getSenha());
-	
-	if(pessoaUser != null) {
+	Pessoa pessoaUser = idaoPessoa.consultarUsuario(pessoa.getLogin(), pessoa.getSenha());
+
+	if (pessoaUser != null) {
 	    FacesContext context = FacesContext.getCurrentInstance();
 	    ExternalContext externalContext = context.getExternalContext();
-	    externalContext.getSessionMap().put("usuariologado", pessoaUser);
+	    externalContext.getSessionMap().put("usuarioLogado", pessoaUser);
 	    return "primeirapagina.jsf";
 	}
 	return "index.jsf";
+    }
+
+    public boolean permiteAcesso(String acesso) {
+
+	FacesContext context = FacesContext.getCurrentInstance();
+	ExternalContext externalContext = context.getExternalContext();
+	Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("usuarioLogado");
+
+
+	if (pessoaUser == null || pessoaUser.getPerfilUser() == null) {
+	    return false;
+	}
+
+	return pessoaUser.getPerfilUser().equals(acesso);
     }
 
     public String salvar() {
@@ -62,6 +75,10 @@ public class PessoaBean implements Serializable {
 
     public Pessoa getPessoa() {
 	return pessoa;
+    }
+    
+    public boolean getAdministrador() {
+	return permiteAcesso("Administrador");
     }
 
     public void setPessoa(Pessoa pessoa) {

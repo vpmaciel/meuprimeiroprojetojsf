@@ -17,8 +17,8 @@
 			<!-- Configurações de Conexão com o MySQL -->
 			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			<property name="jakarta.persistence.jdbc.user" value="root" />
-			<property name="jakarta.persistence.jdbc.password" value="" />
-			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/meuprimeiroprojetojsf" />
+			<property name="jakarta.persistence.jdbc.password" value="" />			
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/meuprimeiroprojetojsf?serverTimezone=UTC" />
 			
 			<!-- Configurações do Hibernate -->
 			<property name="hibernate.connection.CharSet" value="utf8" />
@@ -27,6 +27,7 @@
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true" />
+			
 		</properties>
 	</persistence-unit>
 </persistence>

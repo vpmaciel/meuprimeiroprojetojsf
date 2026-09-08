@@ -57,7 +57,6 @@
 
 			<h:outputLabel value="Perfil:" />
 			<h:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}">
-				<f:selectItem itemValue=" " itemLabel="Não responder" />
 				<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
 				<f:selectItem itemValue="Secretário" itemLabel="Secretário" />
 				<f:selectItem itemValue="Recepcionista" itemLabel="Recepcionista" />
@@ -99,13 +98,13 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink title="Editar" immediate="true">
+				<h:commandLink title="Editar">
 					<h:graphicImage value="/resources/img/edit_32px.png" />
 					<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
 						value="#{pessoa}" />
 				</h:commandLink>
 			</h:column>
-			<h:column>
+			<h:column rendered="#{pessoaBean.administrador}">
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink title="Excluir" action="#{pessoaBean.remove}">
 					<h:graphicImage value="/resources/img/delete_32px.png" />
