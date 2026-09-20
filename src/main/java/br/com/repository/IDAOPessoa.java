@@ -4,6 +4,6 @@ import br.com.entidades.Pessoa;
 
 public interface IDAOPessoa {
     
-    Pessoa consultarUsuario(String login, String senha);
+    Pessoa consultar(String login, String senha);
 
 }
