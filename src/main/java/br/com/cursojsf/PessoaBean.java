@@ -26,6 +26,7 @@ import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
+import br.com.enums.SexoEnum;
 
 @Named(value = "pessoaBean")
 @ViewScoped
@@ -176,7 +177,11 @@ public class PessoaBean implements Serializable {
     }
 
     public List<br.com.entidades.Framework> getListaFrameworks() {
-	    // Busca a lista diretamente do banco via DAOGeneric
-	    return daoGenericFramework.getListEntity(Framework.class);
-	}
+	// Busca a lista diretamente do banco via DAOGeneric
+	return daoGenericFramework.getListEntity(Framework.class);
+    }
+
+    public SexoEnum[] getListaSexos() {
+	return SexoEnum.values();
+    }
 }

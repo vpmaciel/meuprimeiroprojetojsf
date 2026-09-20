@@ -44,11 +44,11 @@
 
 			<h:outputLabel value="Sexo:" />
 			<h:selectOneMenu id="sexo" value="#{pessoaBean.pessoa.sexo}">
-				<f:selectItem itemValue="Não respondido" itemLabel="Não responder" />
-				<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
-				<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
+				<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+				<f:selectItems value="#{pessoaBean.listaSexos}" var="s"
+					itemValue="#{s}" itemLabel="#{s.descricao}" />
 			</h:selectOneMenu>
-			
+
 			<h:outputLabel value="Frameworks:" />
 			<h:selectManyMenu id="frameworks"
 				value="#{pessoaBean.pessoa.frameworks}">
@@ -75,25 +75,6 @@
 				value="#{pessoaBean.pessoa.ativo}">
 			</h:selectBooleanCheckbox>
 
-
-			<h:outputLabel value="Programador:" />
-			<h:selectOneRadio id="nivelProgramador"
-				value="#{pessoaBean.pessoa.nivelProgramador}">
-				<f:selectItem itemValue="Júnior" itemLabel="Júnior" />
-				<f:selectItem itemValue="Pleno" itemLabel="Pleno" />
-				<f:selectItem itemValue="Sênior" itemLabel="Sênior" />
-				<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
-			</h:selectOneRadio>
-
-			<h:outputLabel value="Linguagens:" />
-			<h:selectManyCheckbox id="linguagens"
-				value="#{pessoaBean.pessoa.linguagens}">
-				<f:selectItem itemValue="1" itemLabel="Java" />
-				<f:selectItem itemValue="2" itemLabel="PHP" />
-				<f:selectItem itemValue="3" itemLabel="Python" />
-				<f:selectItem itemValue="4" itemLabel="C#" />
-				<f:selectItem itemValue="5" itemLabel="Cobol" />
-			</h:selectManyCheckbox>
 
 			<h:outputLabel value="CEP:" />
 			<h:inputText value="#{pessoaBean.pessoa.cep}">

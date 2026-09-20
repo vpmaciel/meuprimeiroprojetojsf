@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.entidades.Pessoa;
+import br.com.enums.SexoEnum; // Import do Enum adicionado
 import br.com.jpa.JPAUtil;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
@@ -35,7 +36,10 @@ public class InicializadorBanco {
                 admin.setSenha("admin");
                 admin.setPerfilUser("Administrador");
                 admin.setAtivo(true);
-                admin.setSexo("M");
+                
+                // Passa o valor constante do Enum diretamente
+                admin.setSexo(SexoEnum.M); 
+                
                 admin.setNascimento(new Date());
 
                 em.persist(admin);

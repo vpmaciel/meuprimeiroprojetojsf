@@ -1,21 +1,32 @@
 package br.com.entidades;
 
 import java.util.ArrayList;
+
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.enums.SexoEnum;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+
 
 @Entity
-public class Pessoa{
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +36,23 @@ public class Pessoa{
     private Integer idade;
     @Temporal(TemporalType.DATE)
     private Date nascimento = new Date();
-    private String sexo;
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    
+    @Enumerated(EnumType.STRING)
+    private SexoEnum sexo;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+    @JoinTable(
+        name = "pessoa_framework",
+        joinColumns = @JoinColumn(name = "pessoa_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "framework_id", referencedColumnName = "id")
+    )
     private List<Framework> frameworks = new ArrayList<>();
 
     private Boolean ativo;
     private String login;
     private String senha;    
-    private String perfilUser;
-    private String nivelProgramador;
-    private Integer[] linguagens;
+    private String perfilUser;    
     private String cep;    
     private String logradouro;
     private String complemento;
@@ -49,7 +67,15 @@ public class Pessoa{
     private String ddd;
     private String siafi;
 
-    // 
+    public SexoEnum getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(SexoEnum sexo) {
+        this.sexo = sexo;
+    }
+
+    
     public List<Framework> getFrameworks() {
         return frameworks;
     }
@@ -162,22 +188,6 @@ public class Pessoa{
 	this.cep = cep;
     }
 
-    public Integer[] getLinguagens() {
-        return linguagens;
-    }
-
-    public void setLinguagens(Integer[] linguagens) {
-        this.linguagens = linguagens;
-    }
-
-    public String getNivelProgramador() {
-        return nivelProgramador;
-    }
-
-    public void setNivelProgramador(String nivelProgramador) {
-        this.nivelProgramador = nivelProgramador;
-    }
-
     public String getPerfilUser() {
         return perfilUser;
     }
@@ -216,14 +226,6 @@ public class Pessoa{
 
     public void setId(Long id) {
 	this.id = id;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {	
-        this.sexo = sexo;
     }
 
     public String getNome() {
