@@ -48,12 +48,12 @@
 				<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
 				<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
 			</h:selectOneMenu>
-
+			
 			<h:outputLabel value="Frameworks:" />
 			<h:selectManyMenu id="frameworks"
 				value="#{pessoaBean.pessoa.frameworks}">
 				<f:selectItems value="#{pessoaBean.listaFrameworks}" var="fw"
-					itemValue="#{fw}" itemLabel="#{fw.descricao}" />
+					itemValue="#{fw}" itemLabel="#{fw.nome}" />
 			</h:selectManyMenu>
 
 			<h:outputLabel value="Login:" />

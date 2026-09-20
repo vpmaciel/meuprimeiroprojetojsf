@@ -1,7 +1,6 @@
 package br.com.cursojsf;
 
 import java.io.BufferedReader;
-import br.com.enums.Framework;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +14,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import br.com.dao.DAOGeneric;
+import br.com.entidades.Framework;
 import br.com.entidades.Pessoa;
 import br.com.repository.IDAOPessoa;
 import br.com.repository.IDAOPessoaImpl;
@@ -35,6 +35,7 @@ public class PessoaBean implements Serializable {
 
     private Pessoa pessoa = new Pessoa();
     private DAOGeneric<Pessoa> daoGeneric = new DAOGeneric<Pessoa>();
+    private DAOGeneric<Framework> daoGenericFramework = new DAOGeneric<Framework>();
     private List<Pessoa> pessoas = new ArrayList<Pessoa>();
     private IDAOPessoa idaoPessoa = new IDAOPessoaImpl();
 
@@ -174,7 +175,8 @@ public class PessoaBean implements Serializable {
 	}
     }
 
-    public Framework[] getListaFrameworks() {
-	return Framework.values();
-    }
+    public List<br.com.entidades.Framework> getListaFrameworks() {
+	    // Busca a lista diretamente do banco via DAOGeneric
+	    return daoGenericFramework.getListEntity(Framework.class);
+	}
 }

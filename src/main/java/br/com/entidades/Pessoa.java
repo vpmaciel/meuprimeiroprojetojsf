@@ -5,14 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import br.com.enums.Framework;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -28,9 +26,9 @@ public class Pessoa{
     @Temporal(TemporalType.DATE)
     private Date nascimento = new Date();
     private String sexo;
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Framework> frameworks = new ArrayList<>();
+
     private Boolean ativo;
     private String login;
     private String senha;    
