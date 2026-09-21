@@ -64,7 +64,7 @@
 
 			<h:outputLabel value="Perfil:" />
 			<h:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}">
-				<f:selectItem itemValue="	" itemLabel="Administrador" />
+				<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
 				<f:selectItem itemValue="Secretário" itemLabel="Secretário" />
 				<f:selectItem itemValue="Recepcionista" itemLabel="Recepcionista" />
 			</h:selectOneMenu>
@@ -74,7 +74,6 @@
 			<h:selectBooleanCheckbox id="ativo"
 				value="#{pessoaBean.pessoa.ativo}">
 			</h:selectBooleanCheckbox>
-
 
 			<h:outputLabel value="CEP:" />
 			<h:inputText value="#{pessoaBean.pessoa.cep}">
@@ -123,25 +122,32 @@
 		</h:panelGrid>
 
 		<h:panelGroup>
-			<h:commandButton id="botaoNovo" value="Salvar"
+			<h:commandButton id="botaoSalvar" value="Salvar"
 				action="#{pessoaBean.salvar}" image="/resources/img/save_32px.png"
 				title="Salvar">
-				<f:ajax execute="botaoNovo" render="@form" />
+				<f:ajax execute="@form" render="@form :formTabela" />
 			</h:commandButton>
-			<h:commandButton value="Novo" action="#{pessoaBean.novo}"
-				image="/resources/img/plus_32px.png" title="Novo" />
+
 			<h:commandButton value="Remover" action="#{pessoaBean.remove}"
 				image="/resources/img/delete_32px.png" title="Remover"
 				rendered="#{pessoaBean.administrador}" />
+
+			<h:commandButton value="Novo" action="#{pessoaBean.novo}"
+				image="/resources/img/plus_32px.png" title="Novo">
+				<f:ajax execute="@this" render="@form" />
+			</h:commandButton>
+
 			<h:commandButton id="botaoLimpar" value="Limpar"
 				action="#{pessoaBean.limpar}" image="/resources/img/cancel_32px.png"
 				title="Limpar">
-				<f:ajax execute="botaoLimpar" render="@form" />
+				<f:ajax execute="@this" render="@form" />
 			</h:commandButton>
+
+
 		</h:panelGroup>
 	</h:form>
 
-	<h:form>
+	<h:form id="formTabela">
 
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
 			cellpadding="5">
@@ -164,6 +170,7 @@
 					<h:graphicImage value="/resources/img/edit_32px.png" />
 					<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
 						value="#{pessoa}" />
+					<f:ajax execute="@this" render=":formPessoa" />
 				</h:commandLink>
 			</h:column>
 			<h:column rendered="#{pessoaBean.administrador}">

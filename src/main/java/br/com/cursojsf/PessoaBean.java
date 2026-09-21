@@ -25,7 +25,6 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import jakarta.servlet.http.HttpServletRequest;
 import br.com.enums.SexoEnum;
 
 @Named(value = "pessoaBean")
@@ -58,14 +57,15 @@ public class PessoaBean implements Serializable {
     }
 
     public String deslogar() {
-	FacesContext context = FacesContext.getCurrentInstance();
-	ExternalContext externalContext = context.getExternalContext();
-	externalContext.getSessionMap().remove("usuarioLogado");
-	HttpServletRequest httpServletRequest = (HttpServletRequest) context.getCurrentInstance().getExternalContext()
-		.getRequest();
-	httpServletRequest.getSession().invalidate();
-	return "index.jsf";
-    }
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    ExternalContext externalContext = context.getExternalContext();
+	    
+	    // Invalida a sessão HTTP diretamente pelo ExternalContext do JSF
+	    externalContext.invalidateSession();
+	    
+	    // Retorna a página de login com redirect para limpar a URL do navegador
+	    return "index.xhtml?faces-redirect=true";
+	}
 
     public boolean permiteAcesso(String acesso) {
 
@@ -83,6 +83,7 @@ public class PessoaBean implements Serializable {
     public String salvar() {
 	pessoa = daoGeneric.merge(pessoa);
 	carregarPessoas();
+	System.out.println(pessoa);
 	mostrarMsg("Cadastrado salvo com sucesso !");
 	return "";
     }

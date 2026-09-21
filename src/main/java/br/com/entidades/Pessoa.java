@@ -1,8 +1,5 @@
 package br.com.entidades;
 
-import java.util.ArrayList;
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +9,8 @@ import java.util.Objects;
 import br.com.enums.SexoEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,12 +20,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
-
 
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +32,10 @@ public class Pessoa {
     private String nome;
     private String sobrenome;
     private Integer idade;
+    
     @Temporal(TemporalType.DATE)
     private Date nascimento = new Date();
-    
-    
+
     @Enumerated(EnumType.STRING)
     private SexoEnum sexo;
 
@@ -67,6 +65,46 @@ public class Pessoa {
     private String ddd;
     private String siafi;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+
     public SexoEnum getSexo() {
         return sexo;
     }
@@ -75,7 +113,6 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    
     public List<Framework> getFrameworks() {
         return frameworks;
     }
@@ -83,7 +120,47 @@ public class Pessoa {
     public void setFrameworks(List<Framework> frameworks) {
         this.frameworks = frameworks;
     }
-    
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = (senha != null && !senha.trim().isEmpty()) ? senha : "111";
+    }
+
+    public String getPerfilUser() {
+        return perfilUser;
+    }
+
+    public void setPerfilUser(String perfilUser) {
+        this.perfilUser = perfilUser;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public String getLogradouro() {
         return logradouro;
     }
@@ -180,101 +257,25 @@ public class Pessoa {
         this.siafi = siafi;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-	this.cep = cep;
-    }
-
-    public String getPerfilUser() {
-        return perfilUser;
-    }
-
-    public void setPerfilUser(String perfilUser) {
-        this.perfilUser = perfilUser;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-	this.senha = (senha != null && !senha.trim().isEmpty()) ? senha : "111";
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
-
-    public Long getId() {
-	return id;
-    }
-
-    public void setId(Long id) {
-	this.id = id;
-    }
-
-    public String getNome() {
-	return nome;
-    }
-
-    public void setNome(String nome) {
-	this.nome = nome;
-    }
-
-    public String getSobrenome() {
-	return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-	this.sobrenome = sobrenome;
-    }
-
-    public Integer getIdade() {
-	return idade;
-    }
-
-    public void setIdade(Integer idade) {
-	this.idade = idade;
-    }
-
-    public Date getNascimento() {
-	return nascimento;
-    }
-
-    public void setNascimento(Date nascimento) {
-	this.nascimento = nascimento;
-    }
-
     @Override
     public int hashCode() {
-	return Objects.hash(id);
+        return Objects.hash(id);
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Pessoa other = (Pessoa) obj;
-	return Objects.equals(id, other.id);
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pessoa other = (Pessoa) obj;
+        return Objects.equals(id, other.id);
     }
 
+    @Override
+    public String toString() {
+        return "Pessoa [id=" + id + ", nome=" + nome + "]";
+    }
 }

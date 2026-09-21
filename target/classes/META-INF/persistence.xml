@@ -29,13 +29,13 @@
             <!-- EXIBIR E FORMATAR SQL NO CONSOLE / TERMINAL              -->
             <!-- ======================================================== -->
             <!-- Exibe o SQL gerado pelo Hibernate no terminal -->
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
             
             <!-- Indenta e formata as consultas SQL para facilitar a leitura -->
-            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.format_sql" value="false" />
             
             <!-- Mostra os comentários descrevendo a operação (INSERT, UPDATE, etc.) -->
-            <property name="hibernate.use_sql_comments" value="true" />
+            <property name="hibernate.use_sql_comments" value="false" />
             
             <!-- (Opcional) Exibe os parâmetros reais passados nos '?' do SQL -->
             <property name="trace" value="true" />

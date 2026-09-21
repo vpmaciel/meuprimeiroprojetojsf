@@ -2,7 +2,6 @@ package br.com.dao;
 
 import java.util.List;
 
-import br.com.entidades.Pessoa;
 import br.com.jpa.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
